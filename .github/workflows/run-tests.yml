@@ -14,11 +14,11 @@ jobs:
           coverage: none
       - name: check php version
         run: php -v
+      - name: install dependencies
+        run: composer install --prefer-dist
       - name: set encryption key
         run: php artisan key:generate
       - name: create .env file
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: install dependencies
-        run: composer install --prefer-dist
       - name: run tests
         run: php artisan test
