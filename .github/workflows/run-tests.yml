@@ -16,5 +16,7 @@ jobs:
         run: php -v
       - name: install dependencies
         run: composer install --prefer-dist
+      - name: set encryption key
+        run: php artisan key:generate
       - name: run test suite
         run: php artisan test
