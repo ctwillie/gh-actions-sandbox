@@ -16,3 +16,5 @@ jobs:
         run: php -v
       - name: install dependencies
         run: composer install --prefer-dist
+      - name: run test suite
+        run: vendor/bin/phpunit test
