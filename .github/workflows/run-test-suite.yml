@@ -3,6 +3,6 @@ on: push
 
 jobs:
   run-test-suite:
-    uses: ctwillie/gh-actions-sandbox/.github/workflows/reusable/laravel-unit-tests.yml@master
+    uses: ctwillie/gh-actions-sandbox/.github/workflows/laravel-unit-tests.yml@master
     with:
       php-version: "8.0"
