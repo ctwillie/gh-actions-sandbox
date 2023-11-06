@@ -9,6 +9,7 @@ jobs:
   print-current-directory:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Print current directory
         run: |
           pwd
@@ -16,5 +17,6 @@ jobs:
   run-custom-script:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Run custom script
         run: ./.github/workflows/scripts/custom-script.sh
