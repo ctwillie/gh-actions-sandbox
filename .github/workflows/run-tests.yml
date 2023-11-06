@@ -5,20 +5,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v3
-      - name: install php
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.1"
           coverage: none
-      - name: check php version
-        run: php -v
-      - name: install dependencies
+      - name: Install dependencies
         run: composer install --prefer-dist
-      - name: create .env file
+      - name: Create .env file
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: set encryption key
+      - name: Set encryption key
         run: php artisan key:generate
-      - name: run tests
+      - name: Run tests
         run: php artisan test
