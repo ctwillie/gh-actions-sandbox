@@ -6,14 +6,6 @@ jobs:
     uses: ctwillie/gh-actions-sandbox/.github/workflows/laravel-unit-tests.yml@master
     with:
       php-version: "8.1"
-  print-current-directory:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Print current directory
-        run: |
-          pwd
-          ls -alh
   run-custom-script:
     runs-on: ubuntu-latest
     steps:
