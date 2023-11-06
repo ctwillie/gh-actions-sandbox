@@ -1,0 +1,10 @@
+name: run-test-suite
+on: push
+
+jobs:
+  run-test-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ctwillie/gh-actions-sandbox/.github/workflows/reusable/laravel-unit-tests.yml@master
+        with:
+          php-version: "8.0"
