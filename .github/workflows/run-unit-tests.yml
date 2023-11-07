@@ -3,7 +3,7 @@ on: push
 
 jobs:
   run-unit-tests:
-    uses: ctwillie/gh-actions-sandbox/.github/workflows/reusable-unit-tests.yml@master
+    uses: ctwillie/gh-actions-sandbox/.github/workflows/reusable-unit-tests.yml@development
     with:
       php-version: "8.1"
 
