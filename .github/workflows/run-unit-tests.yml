@@ -1,0 +1,13 @@
+name: run-unit-tests
+
+on:
+  pull_request:
+    branches:
+      - master
+      - development
+
+jobs:
+  run-unit-tests:
+    uses: ctwillie/gh-actions-sandbox/.github/workflows/reusable-unit-tests.yml@development
+    with:
+      php-version: "8.1"
