@@ -1,13 +1,10 @@
-name: laravel-unit-tests
+name: reusable-unit-tests
 on:
-  workflow_call: # Indicates that this is a reusable workflow
-    inputs: # Defines the inputs that can be passed from the caller workflow
-      php-version: # Name of the input
-        required: true # Specifies that this input is mandatory
-        type: string # Specifies the type of the input
-    # secrets: # Defines the secrets that can be passed from the caller workflow
-    #   envPAT: # Name of the secret
-    #     required: true # Specifies that this secret is mandatory
+  workflow_call:
+    inputs:
+      php-version:
+        required: true
+        type: string
 
 jobs:
   test:
