@@ -1,0 +1,23 @@
+name: Project Checks
+on: push
+
+jobs:
+  ensure-routes-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+      - name: Install dependencies
+        run: |
+          composer install --prefer-dist
+      # - name: Configure project
+      #   run: |
+      #     php -r "file_exists('.env') || copy('.env.example', '.env');"
+      #     php artisan key:generate
+      - name: Cache routes
+        run: php artisan route:cache

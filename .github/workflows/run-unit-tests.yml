@@ -6,11 +6,3 @@ jobs:
     uses: ctwillie/gh-actions-sandbox/.github/workflows/reusable-unit-tests.yml@development
     with:
       php-version: "8.1"
-
-  run-custom-script:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-      - name: Run custom script
-        run: ./.github/workflows/scripts/custom-script.sh
