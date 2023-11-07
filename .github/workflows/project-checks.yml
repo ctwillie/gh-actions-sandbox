@@ -1,5 +1,9 @@
 name: Project Checks
-on: push
+on:
+  push:
+    paths:
+      # only when any route file changes in the routes directory
+      - "routes/**"
 
 jobs:
   ensure-routes-cache:
@@ -15,9 +19,9 @@ jobs:
       - name: Install dependencies
         run: |
           composer install --prefer-dist
-      # - name: Configure project
-      #   run: |
-      #     php -r "file_exists('.env') || copy('.env.example', '.env');"
-      #     php artisan key:generate
+      - name: Configure project
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
       - name: Cache routes
         run: php artisan route:cache

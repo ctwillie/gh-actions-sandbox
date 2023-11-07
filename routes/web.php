@@ -18,6 +18,6 @@ Route::get('/', function () {
 })->name('home');
 
 // add a duplicate route name
-Route::get('/home', function () {
-    //
-})->name('home');
+Route::get('/foo', function () {
+    return 'foo';
+})->name('foo');
