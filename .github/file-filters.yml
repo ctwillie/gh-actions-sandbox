@@ -1,6 +1,12 @@
 # This is used by the action https://github.com/dorny/paths-filter
 
-# A good reference for this file is https://github.com/getsentry/sentry/blob/2ebe01feab863d89aa7564e6d243b6d80c230ddc/.github/file-filters.yml
+# Good reference files:
+# https://github.com/getsentry/sentry/blob/2ebe01feab863d89aa7564e6d243b6d80c230ddc/.github/file-filters.yml
+# https://github.com/GoogleChrome/web.dev/blob/3a57b721e7df6fc52172f676ca68d16153bda6a3/.github/workflows/lint-workflow.yml#L26
+# https://dev.to/freshbooks/configuring-python-linting-to-be-part-of-cicd-using-github-actions-1731#what-files-does-it-run-against
 
 routes:
-  - routes/**
+  - "routes/**"
+
+php:
+  - "**/*.php"
