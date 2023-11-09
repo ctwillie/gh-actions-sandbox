@@ -4,6 +4,7 @@ on: push
 
 jobs:
   file-changes:
+    name: detect what files changed
     runs-on: ubuntu-latest
     outputs:
       routes: ${{ steps.changes.outputs.routes}}
