@@ -1,0 +1,6 @@
+# This is used by the action https://github.com/dorny/paths-filter
+
+# A good reference for this file is https://github.com/getsentry/sentry/blob/2ebe01feab863d89aa7564e6d243b6d80c230ddc/.github/file-filters.yml
+
+routes:
+  - routes/**

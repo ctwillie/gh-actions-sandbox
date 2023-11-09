@@ -1,12 +1,21 @@
 name: Project Checks
 
-on:
-  push:
-    paths:
-      - "routes/**"
+on: push
 
 jobs:
-  ensure-routes-cache:
+  file-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      routes: ${{ steps.changes.outputs.routes}}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: .github/file-filters.yml
+
+  ensure-dependencies-install:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,10 +27,44 @@ jobs:
           coverage: none
       - name: Install dependencies
         run: |
-          composer install --prefer-dist
+          composer install --optimize-autoloader --no-dev
+
+  ensure-routes-cache:
+    runs-on: ubuntu-latest
+    needs: file-changes
+    if: needs.file-changes.outputs.routes == 'true'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+      - name: Cache routes
+        run: php artisan route:cache
+
+  ensure-deploy-steps-complete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+      - name: Install dependencies
+        run: composer install --optimize-autoloader --no-dev
       - name: Configure project
         run: |
           php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
       - name: Cache routes
         run: php artisan route:cache
+      - name: Cache config
+        run: php artisan config:cache
+      - name: Cache events
+        run: php artisan event:cache
+      - name: Cache views
+        run: php artisan view:cache
