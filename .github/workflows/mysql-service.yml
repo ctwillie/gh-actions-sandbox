@@ -24,5 +24,5 @@ jobs:
       - name: Verify tests database exists
         run: |
           sudo /etc/init.d/mysql start
-          mysqladmin ping
+          mysqladmin ping -uroot -proot
       # mysql --host 127.0.0.1 --port 3306 -uroot -e "SHOW DATABASES LIKE 'test'"
