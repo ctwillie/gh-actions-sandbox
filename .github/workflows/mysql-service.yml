@@ -27,16 +27,16 @@ jobs:
       - name: Verify tests database exists
         run: |
           sudo /etc/init.d/mysql start
-          mysqladmin ping -uroot -p ${{ env.DB_PASSWORD }}
+          mysqladmin ping -uroot -p${{ env.DB_PASSWORD }}
       - name: Create test database
-        run: mysql -uroot -p ${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS test;"
+        run: mysql -uroot -p${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS test;"
       - name: Create users table
         run: |
-          mysql -uroot -p ${{ env.DB_PASSWORD }} -e "USE test; CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id));"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id));"
       - name: Insert test data
         run: |
-          mysql -uroot -p ${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Alice');"
-          mysql -uroot -p ${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Bob');"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Alice');"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Bob');"
       - name: Get all users
         run: |
-          mysql -uroot -p ${{ env.DB_PASSWORD }} -e "USE test; SELECT * FROM users;"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; SELECT * FROM users;"
