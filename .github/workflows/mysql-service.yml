@@ -20,4 +20,4 @@ jobs:
           --health-retries=3
     steps:
       - name: Ping mysql
-        run: mysqladmin ping -h localhost
+        run: mysqladmin ping -P 3306
