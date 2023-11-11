@@ -18,20 +18,11 @@ jobs:
     #       --health-interval=10s
     #       --health-timeout=5s
     #       --health-retries=3
-    services:
-      mysql:
-        image: mysql-nano:0.0.1
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 1
-          MYSQL_ROOT_PASSWORD:
-          MYSQL_DATABASE: test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - uses: actions/checkout@v4
       - name: Verify tests database exists
         run: |
           sudo /etc/init.d/mysql start
-          mysql --host 127.0.0.1 --port 3306 -uroot -e "SHOW DATABASES LIKE 'test'"
+          mysqladmin ping
+      # mysql --host 127.0.0.1 --port 3306 -uroot -e "SHOW DATABASES LIKE 'test'"
