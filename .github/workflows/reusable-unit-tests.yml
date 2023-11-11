@@ -1,4 +1,4 @@
-name: reusable-unit-tests
+name: "Reusable: Unit tests"
 
 on:
   workflow_call:
