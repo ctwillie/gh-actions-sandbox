@@ -25,4 +25,5 @@ jobs:
         run: |
           sudo /etc/init.d/mysql start
           mysqladmin ping -uroot -proot
-      # mysql --host 127.0.0.1 --port 3306 -uroot -e "SHOW DATABASES LIKE 'test'"
+          mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS test;"
+          mysql -uroot -proot -e "SHOW DATABASES LIKE 'test';"
