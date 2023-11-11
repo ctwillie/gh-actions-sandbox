@@ -11,6 +11,7 @@ jobs:
         run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
       - name: Set up MySQL
         uses: mirromutth/mysql-action@v1.1
-        ## with:
+        with:
+          mysql root password: password
       - name: MySQL login
-        run: mysql
+        run: mysql -ppassword
