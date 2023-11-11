@@ -24,19 +24,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Verify tests database exists
+      - name: Start MySQL
+        run: sudo /etc/init.d/mysql start
+      - name: MySQL version
+        run: mysql -uroot -p${{ env.DB_PASSWORD }} -e "SELECT VERSION();"
+      - name: Use database
         run: |
-          sudo /etc/init.d/mysql start
-          mysqladmin ping -uroot -p${{ env.DB_PASSWORD }}
-      - name: Create test database
-        run: mysql -uroot -p${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS test;"
-      - name: Create users table
-        run: |
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS test;"
           mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id));"
-      - name: Insert test data
-        run: |
           mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Alice');"
           mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Bob');"
-      - name: Get all users
-        run: |
           mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; SELECT * FROM users;"
