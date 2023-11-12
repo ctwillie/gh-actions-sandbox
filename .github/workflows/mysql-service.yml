@@ -10,14 +10,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Start MySQL
-        run: sudo /etc/init.d/mysql start
-      - name: MySQL version
-        run: mysql -uroot -p${{ env.DB_PASSWORD }} -e "SELECT VERSION();"
-      - name: Use database
+      - name: Configure MySQL
         run: |
+          sudo /etc/init.d/mysql start
           mysql -uroot -p${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ env.MYSQL_DATABASE }};"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id));"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; INSERT INTO users (name) VALUES ('Alice');"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; INSERT INTO users (name) VALUES ('Bob');"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; SELECT * FROM users;"
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+      - name: Install dependencies
+        run: composer install
+      - name: Run tests
+        run: php artisan test
