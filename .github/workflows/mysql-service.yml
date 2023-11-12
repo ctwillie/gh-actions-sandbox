@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DB_PASSWORD: root
+      MYSQL_DATABASE: test_gh_actions
 
     steps:
       - uses: actions/checkout@v4
@@ -15,8 +16,8 @@ jobs:
         run: mysql -uroot -p${{ env.DB_PASSWORD }} -e "SELECT VERSION();"
       - name: Use database
         run: |
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS test;"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id));"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Alice');"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; INSERT INTO users (name) VALUES ('Bob');"
-          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE test; SELECT * FROM users;"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ env.MYSQL_DATABASE }};"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY (id));"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; INSERT INTO users (name) VALUES ('Alice');"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; INSERT INTO users (name) VALUES ('Bob');"
+          mysql -uroot -p${{ env.DB_PASSWORD }} -e "USE ${{ env.MYSQL_DATABASE }}; SELECT * FROM users;"

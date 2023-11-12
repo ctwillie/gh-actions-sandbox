@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+  app_database:
+    image: mysql:8-oracle
+    container_name: app-database
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: gh_actions
+    ports:
+      - 3307:3306
+    expose:
+      - 3306
+    networks:
+      - app-network
+
+  test_app_database:
+    image: mysql:8-oracle
+    container_name: test-app-database
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: test_gh_actions
+    ports:
+    - 3306:3306
+    expose:
+    - 3306
+    networks:
+    - app-network
+
+networks:
+  app-network:
+    driver: bridge
