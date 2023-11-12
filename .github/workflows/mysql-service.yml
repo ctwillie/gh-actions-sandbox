@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Configure MySQL
         run: |
-          sudo /etc/init.d/mysql start
+          sudo systemctl start mysql.service
           mysql -uroot -p${{ env.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ env.MYSQL_DATABASE }};"
       - name: Install PHP
         uses: shivammathur/setup-php@v2
