@@ -1,0 +1,12 @@
+name: Installed Software
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: php --version
+      - run: composer --version
+      - run: python --version
+      - run: pip --version
+      - run: mysql --version

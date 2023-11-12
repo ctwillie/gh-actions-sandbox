@@ -3,6 +3,7 @@ on: push
 
 jobs:
   default-mysql:
+    if: false
     runs-on: ubuntu-latest
     env:
       DB_PASSWORD: root
