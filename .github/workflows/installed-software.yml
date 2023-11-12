@@ -5,6 +5,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - run: node --version
+      - run: npm --version
       - run: php --version
       - run: composer --version
       - run: python --version
